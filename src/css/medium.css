@@ -1,0 +1,39 @@
+@media screen and (min-width: 700px) {
+  main {
+    padding: 70px 120px 0px;
+  }
+  .infoFlexBox {
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+  }
+  .navbar-toggle {
+    display: none;
+  }
+  #navbar #navbar-menu,
+  #navbar.opened #navbar-menu {
+    visibility: visible;
+    opacity: 1;
+    position: static;
+    display: block;
+    height: 100%;
+  }
+  #navbar .navbar-links,
+  #navbar.opened .navbar-links {
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    position: static;
+    flex-direction: row;
+    list-style-type: none;
+    max-height: max-content;
+    width: 100%;
+    height: 100%;
+  }
+  #navbar .navbar-link:last-child {
+    margin-right: 0;
+  }
+  #masonry-container, #catalogue-container {
+    column-count: 3;
+  }
+}
