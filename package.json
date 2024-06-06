@@ -7,8 +7,8 @@
     "main": false
   },
   "scripts": {
-    "start": "parcel src/index.html src/explore/index.html src/catalogue/index.html src/breed/index.html src/favorite/index.html src/join/index.html src/join/thankyou.html",
-    "build": "parcel build src/index.html src/explore/index.html src/catalogue/index.html src/breed/index.html src/favorite/index.html src/join/index.html src/join/thankyou.html"
+    "start": "parcel src/index.html src/explore/index.html src/catalogue/index.html src/favorite/index.html src/join/index.html src/join/thankyou.html",
+    "build": "parcel build src/index.html src/explore/index.html src/catalogue/index.html src/favorite/index.html src/join/index.html src/join/thankyou.html"
   },
   "author": "Julio Reyes",
   "devDependencies": {
