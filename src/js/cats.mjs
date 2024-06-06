@@ -1,4 +1,4 @@
-import { assignEvents, showSlides } from "./slideshow.mjs";
+import Slideshow from "./slideshow.mjs";
 
 // creates cat slideshow
 export const getCatSlideshow = async (n) => {
@@ -7,7 +7,6 @@ export const getCatSlideshow = async (n) => {
   if (response.ok) {
     let data = await response.json();
     displaySlideshow(data);
-    assignEvents();
   }
 };
 
@@ -23,19 +22,19 @@ export const getCatExplore = async (n) => {
 
 // displays array of cat images as a slideshow
 export const displaySlideshow = (cats) => {
-  let slideIndex = localStorage.getItem("slideIndex");
-
+  const slideshow = new Slideshow();
   const catsContainer = document.querySelector(".slideshow-container");
 
   let dotsContainer = document.createElement("div");
   dotsContainer.classList.add("dotrow");
-
+  
   let prevArrow = document.createElement("a");
   prevArrow.classList.add("prev");
   prevArrow.innerHTML = "<";
+  prevArrow.addEventListener("click", () =>  slideshow.plusSlides(-1));
   dotsContainer.appendChild(prevArrow);
 
-  cats.forEach((cat) => {
+  cats.forEach((cat, i) => {
     let sectionItem = document.createElement("section");
     sectionItem.classList.add("mySlides");
     sectionItem.classList.add("fade");
@@ -48,6 +47,7 @@ export const displaySlideshow = (cats) => {
 
     let dot = document.createElement("span");
     dot.classList.add("dot");
+    dot.addEventListener("click", () => slideshow.currentSlide(i));
 
     sectionItem.appendChild(img);
     dotsContainer.appendChild(dot);
@@ -58,12 +58,11 @@ export const displaySlideshow = (cats) => {
   let nextArrow = document.createElement("a");
   nextArrow.classList.add("next");
   nextArrow.innerHTML = ">";
+  nextArrow.addEventListener("click", () =>  slideshow.plusSlides(1));
   dotsContainer.appendChild(nextArrow);
 
   catsContainer.appendChild(dotsContainer);
-
-  showSlides(slideIndex);
-  assignEvents();
+  slideshow.showSlides(slideshow.slideIndex);
 };
 
 // displays a mansory of cat images
