@@ -1,10 +1,16 @@
+import { displaySlideshow } from "./cats.mjs";
+
 // get cat image of a certain breed
-export const getBreed = async (breed, n = 1) => {
+export const getBreed = async (breed, n = 1, slideshow = false) => {
   const catURL = `https://api.thecatapi.com/v1/images/search?limit=${n}&breed_ids=${breed}&mime_types=jpg&api_key=${process.env.API_KEY}`;
   const response = await fetch(catURL);
   if (response.ok) {
     let data = await response.json();
-    return data;
+    if (slideshow){
+      displaySlideshow(data);
+    } else {
+      return data;
+    }
   }
 };
 
@@ -13,14 +19,13 @@ export const getBreedList = async (n, page) => {
   const response = await fetch(catURL);
   if (response.ok) {
     let data = await response.json();
-    console.table(data);
     displayBreeds(data);
   }
 };
 
 // gets breed catalogue
 export const displayBreeds = (breeds) => {
-  const breedsContainer = document.querySelector("#catalogue-container");
+  const breedsContainer = document.querySelector(".catalogue-container");
   breeds.forEach(async (breed) => {
     const breedrequest = await getBreed(breed.id);
     for (const obj of breedrequest) {
@@ -29,7 +34,7 @@ export const displayBreeds = (breeds) => {
     sectionItem.classList.add("breed-card");
     
     let link = document.createElement("a");
-    link.href = `/catalogue/index.html?product=${breed.id}`;
+    link.href = `../breed/index.html?breed=${breed.id}`;
 
     let fig = document.createElement("figure")
 
@@ -51,3 +56,14 @@ export const displayBreeds = (breeds) => {
     }
   });
 };
+
+export function assignPagination(param) {
+  let buttons = document.getElementsByClassName("pagebutton");
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].href = `../catalogue/index.html?page=${i}`;
+    if (i === Number(param)) {
+      buttons[i].classList.add("current");
+    }
+  }
+}
+ 

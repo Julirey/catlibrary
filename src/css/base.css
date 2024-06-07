@@ -244,6 +244,7 @@ a {
 
 .simple-button {
   display: inline-block;
+  border: none;
   background: var(--secondary-color);
   color: white;
   padding: 10px 25px;
@@ -251,6 +252,23 @@ a {
   text-decoration: none;
   max-width: 500px;
   align-self: center;
+  cursor: pointer;
+}
+
+.add::before {
+  content: "Add to ";
+}
+
+.add::after {
+  content: " 🤍";
+}
+
+.remove::before {
+  content: "Remove from ";
+}
+
+.remove::after {
+  content: "❤️";
 }
 
 /* Slideshow */
@@ -335,23 +353,22 @@ a {
 
 /* Explore page */
 #masonry-container {
-  column-count: 2; 
+  column-count: 2;
   column-gap: 10px;
-  margin: 10px;
 }
 
 .masonry-item {
-  break-inside: avoid; 
+  break-inside: avoid;
   margin-bottom: 10px;
 }
 
 .masonry-item img {
   width: 100%;
   height: auto;
-  display: block; 
-  transition: transform 0.3s ease; 
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
-  border: 4px solid var(--quaternary-color);
+  display: block;
+  transition: transform 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border: 3px solid var(--quaternary-color);
   border-radius: 5px;
 }
 
@@ -360,8 +377,8 @@ a {
 }
 
 /* Catalogue page */
-#catalogue-container {
-  column-count: 2
+.catalogue-container {
+  column-count: 2;
 }
 
 .breed-card {
@@ -388,6 +405,64 @@ a {
   padding: 8px;
   color: white;
   font-size: larger;
+}
+
+.pagination {
+  display: inline-block;
+  margin: 0 auto; 
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.current {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+/* Details page */
+.breed-add {
+  margin: 20px 0px;
+}
+
+.divider {
+  width: 80%;
+  border: solid 2px var(--secondary-color);
+  margin: 0px auto;
+}
+
+.stat-container {
+  width: 100%;
+  background-color: #ddd; 
+  animation: expandWidth;
+  animation-duration: 3s;
+}
+
+.skills {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+}
+
+.green {background-color: #04AA6D;}
+.blue {background-color: #2196F3;}
+.red {background-color: #f44336;}
+.gray {background-color: #808080;}
+
+@keyframes expandWidth {
+  0% { width: 0; }
+  100% { width: 100%; }
 }
 
 /* Join page */

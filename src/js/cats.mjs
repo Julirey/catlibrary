@@ -1,22 +1,18 @@
 import Slideshow from "./slideshow.mjs";
 
 // creates cat slideshow
-export const getCatSlideshow = async (n) => {
+export const getCat = async (n, display = "") => {
   const catURL = `https://api.thecatapi.com/v1/images/search?limit=${n}&mime_types=jpg&api_key=${process.env.API_KEY}`;
   const response = await fetch(catURL);
   if (response.ok) {
     let data = await response.json();
-    displaySlideshow(data);
-  }
-};
-
-// creates cat board
-export const getCatExplore = async (n) => {
-  const catURL = `https://api.thecatapi.com/v1/images/search?limit=${n}&mime_types=jpg&api_key=${process.env.API_KEY}`;
-  const response = await fetch(catURL);
-  if (response.ok) {
-    let data = await response.json();
-    displayExplore(data);
+    if (display === "slideshow") {
+      displaySlideshow(data);
+    } else if (display === "masonry") {
+      displayExplore(data);
+    } else {
+      return data;
+    }
   }
 };
 
@@ -27,11 +23,11 @@ export const displaySlideshow = (cats) => {
 
   let dotsContainer = document.createElement("div");
   dotsContainer.classList.add("dotrow");
-  
+
   let prevArrow = document.createElement("a");
   prevArrow.classList.add("prev");
   prevArrow.innerHTML = "<";
-  prevArrow.addEventListener("click", () =>  slideshow.plusSlides(-1));
+  prevArrow.addEventListener("click", () => slideshow.plusSlides(-1));
   dotsContainer.appendChild(prevArrow);
 
   cats.forEach((cat, i) => {
@@ -58,7 +54,7 @@ export const displaySlideshow = (cats) => {
   let nextArrow = document.createElement("a");
   nextArrow.classList.add("next");
   nextArrow.innerHTML = ">";
-  nextArrow.addEventListener("click", () =>  slideshow.plusSlides(1));
+  nextArrow.addEventListener("click", () => slideshow.plusSlides(1));
   dotsContainer.appendChild(nextArrow);
 
   catsContainer.appendChild(dotsContainer);

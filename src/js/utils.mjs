@@ -7,27 +7,23 @@ export function qs(selector, parent = document) {
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+  let empty = [];
+  if (localStorage.getItem(key)) {
+    return JSON.parse(localStorage.getItem(key));
+  } else {
+    return empty;
+  }
 }
 // save data to local storage
 export function setLocalStorage(key, data) {
-  const inStorage = getLocalStorage(key);
-  const dataArray = inStorage === null ? [] : inStorage;
-  let duplicateArray = [];
-  dataArray.map((tent) => {
-    if (data.Id == tent.Id) {
-      tent.FinalPrice += tent.ListPrice;
-      duplicateArray.push(tent);
-    } else {
-      duplicateArray.push(tent);
-    }
-  });
-  const checkTentExist = duplicateArray.find((exist) => exist.Id === data.Id);
-  if (!checkTentExist) {
-    duplicateArray.push(data);
+  const favList = getLocalStorage(key);
+  let arr = [];
+  if (favList === undefined || favList.length === 0) {
+    arr.push(data);
+  } else {
+    arr = toggle(favList, data, (item) => item.id);
   }
-
-  localStorage.setItem(key, JSON.stringify(duplicateArray));
+  localStorage.setItem(key, JSON.stringify(arr));
 }
 
 // set a listener for both touchend and click
@@ -42,7 +38,7 @@ export function setClick(selector, callback) {
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get(param); 
+  const product = urlParams.get(param);
   return product;
 }
 
@@ -90,7 +86,7 @@ export const loadHeaderFooter = async () => {
   if (footerElement) {
     footerElement.innerHTML = "";
     renderWithTemplate(footerTemplate, footerElement);
-    loadFooterInfo()
+    loadFooterInfo();
   }
 };
 
@@ -128,9 +124,27 @@ export function loadMenu() {
 }
 
 export function loadFooterInfo() {
-    // Get Elements
+  // Get Elements
   const ParagraphElement = document.querySelector("#copyrightYear");
 
   let currentYear = new Date().getFullYear();
   ParagraphElement.innerHTML = `©${currentYear} Cat Library`;
+}
+
+export function percentage(partialValue, totalValue) {
+  return (100 * partialValue) / totalValue;
+}
+
+const toggle = (arr, item, getValue = (item) => item) => {
+  if (arr.some((i) => getValue(i) === getValue(item)))
+    return arr.filter((i) => getValue(i) !== getValue(item));
+  else return [...arr, item];
+};
+
+export function showMessage(container, message) {
+  const element = document.querySelector(container);
+  let para = document.createElement("p");
+  para.innerHTML = message;
+  para.classList.add("message");
+  element.insertBefore(para, element.childNodes[2]);
 }

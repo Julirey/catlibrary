@@ -1,3 +1,3 @@
-import { getCatSlideshow } from "./cats.mjs";
+import { getCat } from "./cats.mjs";
 
-getCatSlideshow(10);
+getCat(10, "slideshow");

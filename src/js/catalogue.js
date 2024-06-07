@@ -1,3 +1,7 @@
-import { getBreedList } from "./breedList.mjs";
+import { getParam } from "./utils.mjs";
+import { assignPagination, getBreedList } from "./breedList.mjs";
 
-getBreedList(10, 4);
+const page = getParam("page")
+
+getBreedList(10, page);
+assignPagination(page);

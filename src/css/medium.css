@@ -33,7 +33,7 @@
   #navbar .navbar-link:last-child {
     margin-right: 0;
   }
-  #masonry-container, #catalogue-container {
+  #masonry-container, .catalogue-container {
     column-count: 3;
   }
 }

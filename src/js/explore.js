@@ -1,3 +1,3 @@
-import { getCatExplore } from "./cats.mjs";
+import { getCat } from "./cats.mjs";
 
-getCatExplore(30);
+getCat(30, "masonry");

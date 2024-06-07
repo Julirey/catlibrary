@@ -7,14 +7,16 @@
   main h1,
   #newsletter,
   #masonry-container,
-  #catalogue-container {
+  .catalogue-container,
+  .message,
+  .pagination {
     grid-column: span 2;
   }
   .simple-button {
     grid-column: 2/3;
     justify-self: center;
   }
-  #masonry-container, #catalogue-container {
+  #masonry-container, .catalogue-container {
     column-count: 4;
   }
 }
