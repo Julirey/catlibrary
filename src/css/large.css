@@ -9,7 +9,8 @@
   #masonry-container,
   .catalogue-container,
   .message,
-  .pagination {
+  .pagination,
+  .thankyoumessage {
     grid-column: span 2;
   }
   .simple-button {
