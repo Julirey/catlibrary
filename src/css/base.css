@@ -372,7 +372,7 @@ a {
   border-radius: 5px;
 }
 
-.masonry-item:hover {
+.masonry-item:hover, .breed-card:hover {
   transform: scale(1.05);
 }
 
